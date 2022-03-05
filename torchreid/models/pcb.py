@@ -162,6 +162,7 @@ class PCB(nn.Module):
             3, 64, kernel_size=7, stride=2, padding=3, bias=False
         )
         self.bn1 = nn.BatchNorm2d(64)
+        # inplace 从上层网络Conv2d中传递下来的tensor直接进行修改，这样能够节省运算内存，不用多存储其他变量
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         self.layer1 = self._make_layer(block, 64, layers[0])
@@ -184,7 +185,12 @@ class PCB(nn.Module):
         )
 
         self._init_params()
-
+    '''
+    变量:
+    1.  前带_的变量:  标明是一个私有变量, 只用于标明,  外部类还是可以访问到这个变量  _private_value
+    2.  前带两个_ ,后带两个_ 的变量:  标明是内置变量,__class__ 两个前导下划线会导致变量在解释期间被更名。这是为了避免内置变量和其他变量产生冲突。用户定义的变量要严格避免这种风格。以免导致混乱。
+    3.   大写加下划线的变量:  标明是  不会发生改变的全局变量 USER_CONSTANT
+    '''
     def _make_layer(self, block, planes, blocks, stride=1):
         downsample = None
         if stride != 1 or self.inplanes != planes * block.expansion:
@@ -204,7 +210,12 @@ class PCB(nn.Module):
         self.inplanes = planes * block.expansion
         for i in range(1, blocks):
             layers.append(block(self.inplanes, planes))
-
+        '''
+        python 在列表，元组，字典变量前加*号。。
+        可以发现，在列表前加*号，会将列表拆分成一个一个的独立元素，不光是列表、元组、字典，由numpy生成的向量也可以拆分；
+        那这些又有什么用呢？ ...
+        不难发现，如果不加*，add函数将整个列表当做一个元素使用,
+        '''
         return nn.Sequential(*layers)
 
     def _init_params(self):

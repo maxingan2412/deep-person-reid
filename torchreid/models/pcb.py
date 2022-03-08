@@ -142,10 +142,10 @@ class PCB(nn.Module):
 
     def __init__(
         self,
-        num_classes,
+        num_classes,  #debug这里是5350
         loss,
-        block,
-        layers,
+        block,  #在pcb_4中定义
+        layers, # [3, 4, 6, 3]
         parts=6,
         reduced_dim=256,
         nonlinear='relu',

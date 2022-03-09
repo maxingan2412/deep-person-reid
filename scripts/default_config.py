@@ -41,13 +41,13 @@ def get_default_config():
     cfg.sampler = CN()
     cfg.sampler.train_sampler = 'RandomSampler' # sampler for source train loader
     cfg.sampler.train_sampler_t = 'RandomSampler' # sampler for target train loader
-    cfg.sampler.num_instances = 4 # number of instances per identity for RandomIdentitySampler
+    cfg.sampler.num_instances = 4 # number of instances per identity for RandomIdentitySampler 一个 RandomIdentitySampler 里面 对于一个ID，他有几张照片。
     cfg.sampler.num_cams = 1 # number of cameras to sample in a batch (for RandomDomainSampler)
     cfg.sampler.num_datasets = 1 # number of datasets to sample in a batch (for RandomDatasetSampler)
 
     # video reid setting
     cfg.video = CN()
-    cfg.video.seq_len = 15 # number of images to sample in a tracklet
+    cfg.video.seq_len = 15 # number of images to sample in a tracklet    一个 tracklet中有几张照片？
     cfg.video.sample_method = 'evenly' # how to sample images from a tracklet
     cfg.video.pooling_method = 'avg' # how to pool features over a tracklet
 

@@ -13,7 +13,7 @@ from torchreid.utils import (
     MetricMeter, AverageMeter, re_ranking, open_all_layers, save_checkpoint,
     open_specified_layers, visualize_ranked_results
 )
-from torchreid.losses import DeepSupervision
+from torchreid.losses import DeepSupervision,DeepSupervision_kspattention
 
 
 class Engine(object):
@@ -438,6 +438,14 @@ class Engine(object):
         else:
             loss = criterion(outputs, targets)
         return loss
+
+    def compute_loss_attention(self, criterion, outputs, targets, f_sum):
+        if isinstance(outputs, (tuple, list)):
+            loss = DeepSupervision_kspattention(criterion, outputs, targets, f_sum)
+        else:
+            loss = criterion(outputs, targets, f_sum)
+        return loss
+
 
     def extract_features(self, input):
         return self.model(input)

@@ -42,7 +42,7 @@ class CrossEntropyLoss(nn.Module):
                 Each position contains the label index.
         """
         log_probs = self.logsoftmax(inputs)
-        zeros = torch.zeros(log_probs.size())
+        zeros = torch.zeros(log_probs.size()) #shape 128*5350
         targets = zeros.scatter_(1, targets.unsqueeze(1).data.cpu(), 1)
         if self.use_gpu:
             targets = targets.cuda()

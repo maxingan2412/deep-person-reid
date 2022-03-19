@@ -445,7 +445,7 @@ class VideoDataset(Dataset):
             img = img.unsqueeze(0) # img must be torch.Tensor
             imgs.append(img)
         imgs = torch.cat(imgs, dim=0)
-
+        #mar20 可能这里不一样所以video的数据和pose 的不一样
         item = {'img': imgs, 'pid': pid, 'camid': camid, 'dsetid': dsetid}
 
         return item

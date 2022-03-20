@@ -185,7 +185,7 @@ class Engine(object):
         self.start_epoch = start_epoch
         self.max_epoch = max_epoch
         print('=> Start training')
-
+        # 按照 cfg的参数开始一个epoch的训练
         for self.epoch in range(self.start_epoch, self.max_epoch):
             self.train(
                 print_freq=print_freq,

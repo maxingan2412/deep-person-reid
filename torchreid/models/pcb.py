@@ -248,7 +248,7 @@ class PCB(nn.Module):
         x = self.layer4(x)
         return x
 
-    def forward(self, x):
+    def forward(self, x):  # pcb 的有用输入应该就只是图片  目前的网络没用到vid的信息。是否根据 vid的信息 比如第几镇来加权？ 因为目前kmp的输入是随机sample出来的。然后直接连接。下一篇的论文可以考虑这点。
         f = self.featuremaps(x)
         v_g = self.parts_avgpool(f)
 

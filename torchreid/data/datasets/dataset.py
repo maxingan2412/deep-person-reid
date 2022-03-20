@@ -446,7 +446,7 @@ class VideoDataset(Dataset):
             imgs.append(img)
         imgs = torch.cat(imgs, dim=0)
         #mar20 可能这里不一样所以video的数据和pose 的不一样
-        item = {'img': imgs, 'pid': pid, 'camid': camid, 'dsetid': dsetid}
+        item = {'img': imgs, 'pid': pid, 'camid': camid, 'dsetid': dsetid}   # pcb 的posetrackreidvo 指向这里。 item含有的 就是pcb中的input含有的。
 
         return item
 

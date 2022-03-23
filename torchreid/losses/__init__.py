@@ -22,7 +22,11 @@ def DeepSupervision(criterion, xs, y):  #y.shape = bs * seqlen
 
 def DeepSupervision_kspattention(criterion, xs, y,f_sum):
     loss = 0.
-    v_g_ratio = 4 / 6
+    loss_amount = len(xs)
+    if loss_amount == 4:
+        v_g_ratio = 1
+    else:
+        v_g_ratio = 4 / 6
     for idx, x in enumerate(xs):
         if idx <= 3:
             #for i in range(x.shape[0]):

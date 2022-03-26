@@ -270,7 +270,8 @@ class PCB(nn.Module):
             return y
         elif self.loss == 'triplet':
             v_g = F.normalize(v_g, p=2, dim=1)
-            return y, v_g.view(v_g.size(0), -1)
+            # return y, v_g.view(v_g.size(0), -1)
+            return y
         else:
             raise KeyError('Unsupported loss: {}'.format(self.loss))
 

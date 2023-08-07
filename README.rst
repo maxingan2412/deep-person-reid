@@ -33,6 +33,7 @@ You can find some research projects that are built on top of Torchreid `here <ht
 
 What's new
 ------------
+- [Aug 2022] We have added model export capabilities to the following frameworks: ONNX, OpenVINO and TFLite. The export script can be found `here <https://github.com/KaiyangZhou/deep-person-reid/blob/master/tools/export.py>`_
 - [Aug 2021] We have released the ImageNet-pretrained models of ``osnet_ain_x0_75``, ``osnet_ain_x0_5`` and ``osnet_ain_x0_25``. The pretraining setup follows `pycls <https://github.com/facebookresearch/pycls/blob/master/configs/archive/imagenet/resnet/R-50-1x64d_step_8gpu.yaml>`_.
 - [Apr 2021] We have updated the appendix in the `TPAMI version of OSNet <https://arxiv.org/abs/1910.06827v5>`_ to include results in the multi-source domain generalization setting. The trained models can be found in the `Model Zoo <https://kaiyangzhou.github.io/deep-person-reid/MODEL_ZOO.html>`_.
 - [Apr 2021] We have added a script to automate the process of calculating average results over multiple splits. For more details please see ``tools/parse_test_res.py``.
@@ -83,6 +84,10 @@ Make sure `conda <https://www.anaconda.com/distribution/>`_ is installed.
     # install torchreid (don't need to re-build it if you modify the source code)
     python setup.py develop
 
+Another way to install is to run everything inside docker container:
+
+- build: ``make build-image``
+- run: ``make run``
 
 Get started: 30 seconds to Torchreid
 -------------------------------------
@@ -97,14 +102,14 @@ Get started: 30 seconds to Torchreid
 .. code-block:: python
     
     datamanager = torchreid.data.ImageDataManager(
-        root='reid-data',
-        sources='market1501',
-        targets='market1501',
+        root="reid-data",
+        sources="market1501",
+        targets="market1501",
         height=256,
         width=128,
         batch_size_train=32,
         batch_size_test=100,
-        transforms=['random_flip', 'random_crop']
+        transforms=["random_flip", "random_crop"]
     )
 
 3 Build model, optimizer and lr_scheduler
@@ -112,9 +117,9 @@ Get started: 30 seconds to Torchreid
 .. code-block:: python
     
     model = torchreid.models.build_model(
-        name='resnet50',
+        name="resnet50",
         num_classes=datamanager.num_train_pids,
-        loss='softmax',
+        loss="softmax",
         pretrained=True
     )
 
@@ -122,13 +127,13 @@ Get started: 30 seconds to Torchreid
 
     optimizer = torchreid.optim.build_optimizer(
         model,
-        optim='adam',
+        optim="adam",
         lr=0.0003
     )
 
     scheduler = torchreid.optim.build_lr_scheduler(
         optimizer,
-        lr_scheduler='single_step',
+        lr_scheduler="single_step",
         stepsize=20
     )
 
@@ -149,7 +154,7 @@ Get started: 30 seconds to Torchreid
 .. code-block:: python
     
     engine.run(
-        save_dir='log/resnet50',
+        save_dir="log/resnet50",
         max_epoch=60,
         eval_freq=10,
         print_freq=10,

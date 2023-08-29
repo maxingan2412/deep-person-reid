@@ -201,7 +201,7 @@ class RandomDatasetSampler(Sampler):
     def __len__(self):
         return self.length
 
-
+#822 建立train_sampler
 def build_train_sampler(
     data_source,
     train_sampler,
@@ -239,7 +239,7 @@ def build_train_sampler(
     elif train_sampler == 'SequentialSampler':
         sampler = SequentialSampler(data_source)
 
-    elif train_sampler == 'RandomSampler':
+    elif train_sampler == 'RandomSampler': #822 上面选的是这个
         sampler = RandomSampler(data_source)
 
     return sampler

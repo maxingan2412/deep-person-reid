@@ -24,7 +24,7 @@ __image_datasets = {
 }
 
 __video_datasets = {
-    'mars': Mars,
+    'mars': Mars, #指向mars类，
     'ilidsvid': iLIDSVID,
     'prid2011': PRID2011,
     'dukemtmcvidreid': DukeMTMCVidReID

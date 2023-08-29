@@ -118,7 +118,7 @@ def resume_from_checkpoint(fpath, model, optimizer=None, scheduler=None):
         >>> )
     """
     print('Loading checkpoint from "{}"'.format(fpath))
-    checkpoint = load_checkpoint(fpath)
+    checkpoint = load_checkpoint(fpath) #823是一个字典 key分别是 state_dict epoch rank1 optimizer scheduler
     model.load_state_dict(checkpoint['state_dict'])
     print('Loaded model weights')
     if optimizer is not None and 'optimizer' in checkpoint.keys():

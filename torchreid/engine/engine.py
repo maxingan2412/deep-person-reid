@@ -314,7 +314,7 @@ class Engine(object):
             but not a must. Please refer to the source code for more details.
         """
         self.set_model_mode('eval')
-        targets = list(self.test_loader.keys())
+        targets = list(self.test_loader.keys()) # 823 ['mars']
 
         for name in targets:
             domain = 'source' if name in self.datamanager.sources else 'target'

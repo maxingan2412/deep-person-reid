@@ -5,8 +5,8 @@ from scipy.io import loadmat
 
 from ..dataset import VideoDataset
 
-
-class Mars(VideoDataset):
+#822 mars的类
+class Mars(VideoDataset): #作用仅仅是把数据集组织起来，并没有对数据集进行处理，比如sampler这些操作
     """MARS.
 
     Reference:
@@ -61,7 +61,7 @@ class Mars(VideoDataset):
         ]
         track_gallery = track_test[gallery_IDX, :]
 
-        train = self.process_data(
+        train = self.process_data( #822 得到的是tracklets，每个tracklet是一个tuple，包含img_paths, pid, camid，这里是3 但是后面用的时候会变成4,  原因似乎是因为集成的父类后面增添了一维，
             train_names, track_train, home_dir='bbox_train', relabel=True
         )
         query = self.process_data(
@@ -120,7 +120,7 @@ class Mars(VideoDataset):
                 osp.join(self.dataset_dir, home_dir, img_name[:4], img_name)
                 for img_name in img_names
             ]
-            if len(img_paths) >= min_seq_len:
+            if len(img_paths) >= min_seq_len: #相当于过滤掉了长度小于min_seq_len的img。
                 img_paths = tuple(img_paths)
                 tracklets.append((img_paths, pid, camid))
 

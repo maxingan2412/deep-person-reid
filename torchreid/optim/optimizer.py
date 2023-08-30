@@ -108,7 +108,7 @@ def build_optimizer(
         ]
 
     else:
-        param_groups = model.parameters()
+        param_groups = model.parameters() # model.parameters() 是一个方法，用于返回一个迭代器，该迭代器会遍历模型（即一个 nn.Module 对象）中所有的参数（即权重和偏置等）。
 
     if optim == 'adam':
         optimizer = torch.optim.Adam(

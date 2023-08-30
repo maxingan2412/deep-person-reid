@@ -227,7 +227,7 @@ def build_train_sampler(
     assert train_sampler in AVAI_SAMPLERS, \
         'train_sampler must be one of {}, but got {}'.format(AVAI_SAMPLERS, train_sampler)
 
-    if train_sampler == 'RandomIdentitySampler':
+    if train_sampler == 'RandomIdentitySampler': #829后续选这个
         sampler = RandomIdentitySampler(data_source, batch_size, num_instances)
 
     elif train_sampler == 'RandomDomainSampler':
@@ -240,6 +240,6 @@ def build_train_sampler(
         sampler = SequentialSampler(data_source)
 
     elif train_sampler == 'RandomSampler': #822 上面选的是这个
-        sampler = RandomSampler(data_source)
+        sampler = RandomSampler(data_source) #这里都是默认 按照默认参数的设置，这里其实就是把8298的list里面的元素打乱。tuple内部的元素不变
 
     return sampler

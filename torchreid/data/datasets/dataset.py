@@ -55,7 +55,7 @@ class Dataset(object):
         # 4-tuple (img_path(s), pid, camid, dsetid) by
         # adding a dataset indicator "dsetid"
         if len(train[0]) == 3:
-            train = [(*items, 0) for items in train]
+            train = [(*items, 0) for items in train] #把后面加个0，表示dsetid
         if len(query[0]) == 3:
             query = [(*items, 0) for items in query]
         if len(gallery[0]) == 3:
@@ -459,8 +459,8 @@ class VideoDataset(Dataset):
 
         num_gallery_pids = self.get_num_pids(self.gallery)
         num_gallery_cams = self.get_num_cams(self.gallery)
-
-        print('=> Loaded {}'.format(self.__class__.__name__))
+        print(' father class is Dataset,which have self.show_summary() that is override in videoDataset, so this is videoDataset show_summary()')
+        print('=> here is Class VideoDataset ------ Loaded {}'.format(self.__class__.__name__))
         print('  -------------------------------------------')
         print('  subset   | # ids | # tracklets | # cameras')
         print('  -------------------------------------------')
